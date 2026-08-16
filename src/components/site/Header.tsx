@@ -22,6 +22,7 @@ export function Header() {
   }, []);
 
   const solid = scrolled || !overlay;
+  const logo = solid ? "/public/images/Metro-city-builders-logo.png" : "/public/images/Metro-city-builders-white.png";
 
   return (
     <header
@@ -33,20 +34,11 @@ export function Header() {
     >
       <div className="shell flex h-20 items-center justify-between gap-6">
         <Link to="/" className="flex flex-col leading-none" onClick={() => setOpen(false)}>
-          <span
-            className={`font-display text-xl tracking-[0.16em] uppercase transition-colors ${
-              solid || open ? "text-foreground" : "text-ink-foreground"
-            }`}
-          >
-            Metro City
-          </span>
-          <span
-            className={`mt-1 text-[0.6rem] font-semibold tracking-[0.42em] uppercase transition-colors ${
-              solid || open ? "text-muted-foreground" : "text-ink-foreground/70"
-            }`}
-          >
-            Builders
-          </span>
+          <img 
+            src={logo} 
+            alt="Metro City Builders" 
+            className="h-[68px] w-auto" 
+          />
         </Link>
 
         <nav className="hidden items-center gap-9 md:flex">

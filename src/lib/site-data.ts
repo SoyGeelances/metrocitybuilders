@@ -189,9 +189,6 @@ export type Leader = {
 };
 
 export const leaders: Leader[] = [
-  { name: "Tony Zeng", title: "Chairman & Chief Executive Officer" },
-  { name: "John Morrison", title: "Chief Operating Officer" },
-  { name: "Michael Campbell", title: "Chief Marketing Officer" },
   {
     name: "Carol Gao",
     title: "Project Director, Vice President",

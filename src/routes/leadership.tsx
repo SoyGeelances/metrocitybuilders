@@ -47,16 +47,16 @@ function LeadershipPage() {
         </div>
       </section>
 
-      <div className="relative h-[56vh] overflow-hidden bg-ink">
+      <div className="relative h-auto overflow-hidden bg-ink">
         <img
-          src="/images/team.webp"
+          src="/images/team-mcb.webp"
           alt="The Metro City Builders leadership team"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover max-w-[900px] mx-auto"
         />
       </div>
 
-      <section className="shell py-24 lg:py-32">
-        <div className="grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="shell py-24 lg:py-32 max-w-[1180px]">
+        <div className="grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
           {leaders.map((l, i) => (
             <Reveal key={l.name} delay={(i % 3) * 90}>
               <article className="group">
@@ -88,7 +88,7 @@ function LeadershipPage() {
         </div>
       </section>
 
-      <section className="bg-card py-24">
+      <section className="bg-card py-20">
         <div className="shell text-center">
           <h2 className="mx-auto max-w-2xl font-display text-4xl leading-[1.15]">
             Work with our team.

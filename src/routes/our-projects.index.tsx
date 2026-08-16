@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { Reveal } from "@/components/site/Reveal";
-import { categories, projects } from "@/lib/site-data";
+import { projects } from "@/lib/site-data";
 
 export const Route = createFileRoute("/our-projects/")({
   head: () => ({
@@ -24,43 +23,18 @@ export const Route = createFileRoute("/our-projects/")({
 });
 
 function ProjectsPage() {
-  const [filter, setFilter] = useState<string>("All");
-  const visible = filter === "All" ? projects : projects.filter((p) => p.category === filter);
+  const visible = projects;
 
   return (
     <>
-      <section className="border-b border-hairline pt-40 pb-16">
+      <section className="border-hairline pt-40 pb-8">
         <div className="shell">
           <p className="eyebrow">Portfolio</p>
           <h1 className="mt-8 max-w-4xl font-display text-5xl leading-[1.06] sm:text-7xl">
             Current and completed developments.
           </h1>
-          <p className="mt-8 max-w-2xl leading-relaxed text-muted-foreground">
-            Ten developments across Los Angeles, Orange, Riverside and San Bernardino Counties —
-            from state-of-the-art medical facilities to coastal condominiums and gated communities.
-          </p>
         </div>
       </section>
-
-      <div className="sticky top-20 z-30 border-b border-hairline bg-background/92 backdrop-blur-xl">
-        <div className="shell flex flex-wrap gap-x-8 gap-y-3 py-5">
-          {categories.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => setFilter(c)}
-              className={`text-[0.7rem] font-semibold tracking-[0.2em] uppercase transition-colors ${
-                filter === c ? "text-bronze" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {c}
-              <span className="ml-2 text-[0.6rem] opacity-60">
-                {c === "All" ? projects.length : projects.filter((p) => p.category === c).length}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
 
       <section className="shell py-20 lg:py-28">
         <div className="grid gap-x-10 gap-y-20 md:grid-cols-2">
