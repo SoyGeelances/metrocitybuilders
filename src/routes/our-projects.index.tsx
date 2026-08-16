@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { Reveal } from "@/components/site/Reveal";
-import { categories, projects } from "@/lib/site-data";
+import { projects } from "@/lib/site-data";
 
 export const Route = createFileRoute("/our-projects/")({
   head: () => ({
@@ -24,9 +23,6 @@ export const Route = createFileRoute("/our-projects/")({
 });
 
 function ProjectsPage() {
-  const [filter, setFilter] = useState<string>("All");
-  const visible = filter === "All" ? projects : projects.filter((p) => p.category === filter);
-
   return (
     <>
       <section className="border-b border-hairline pt-40 pb-16">
@@ -42,29 +38,9 @@ function ProjectsPage() {
         </div>
       </section>
 
-      <div className="sticky top-20 z-30 border-b border-hairline bg-background/92 backdrop-blur-xl">
-        <div className="shell flex flex-wrap gap-x-8 gap-y-3 py-5">
-          {categories.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => setFilter(c)}
-              className={`text-[0.7rem] font-semibold tracking-[0.2em] uppercase transition-colors ${
-                filter === c ? "text-bronze" : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {c}
-              <span className="ml-2 text-[0.6rem] opacity-60">
-                {c === "All" ? projects.length : projects.filter((p) => p.category === c).length}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
       <section className="shell py-20 lg:py-28">
         <div className="grid gap-x-10 gap-y-20 md:grid-cols-2">
-          {visible.map((p, i) => (
+          {projects.map((p, i) => (
             <Reveal key={p.slug} delay={(i % 2) * 90}>
               <Link to="/our-projects/$slug" params={{ slug: p.slug }} className="group block">
                 <div className="overflow-hidden bg-muted">
