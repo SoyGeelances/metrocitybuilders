@@ -22,7 +22,7 @@ export function Header() {
   }, []);
 
   const solid = scrolled || !overlay;
-  const logo = solid ? "/public/images/Metro-city-builders-logo.png" : "/public/images/Metro-city-builders-white.png";
+  const logo = solid ? "/images/Metro-city-builders-logo.png" : "/images/Metro-city-builders-white.png";
 
   return (
     <header
