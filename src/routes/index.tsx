@@ -37,7 +37,7 @@ const approach = [
   {
     step: "01",
     title: "Acquire",
-    body: "We source and acquire land across Los Angeles, Orange, Riverside and San Bernardino Counties, primarily for our own account.",
+    body: "We source and acquire land across Los Angeles, Orange, Riverside and San Bernardino Counties, primarily as principal investors.",
   },
   {
     step: "02",
@@ -47,12 +47,12 @@ const approach = [
   {
     step: "03",
     title: "Finance",
-    body: "As a long-term investor as well as a developer, we arrange financing with select partners and institutions.",
+    body: "As both long-term investors and developers, we arrange financing through select capital partners and institutions.",
   },
   {
     step: "04",
     title: "Build",
-    body: "We manage construction end to end — build-to-suit for companies and public agencies, and for residential and commercial tenants.",
+    body: "We manage construction end to end, delivering build-to-suit projects for public agencies, companies, and residential and commercial tenants.",
   },
 ];
 
@@ -63,7 +63,7 @@ const strengths = [
   },
   {
     title: "Diverse product types",
-    body: "Medical, mixed-use, senior, apartment, office, retail and light industrial.",
+    body: "Spanning medical, mixed-use, senior, apartment, office, retail, and light industrial properties.",
   },
   {
     title: "Financial stability",
@@ -91,17 +91,18 @@ function Home() {
             >
               Real estate shaped
               <br />
-              by design, held
+              by design, built
               <br />
-              for the long term.
+              to last.
             </h1>
             <div
               className="rise mt-12 border-t border-ink-foreground/20 pt-8"
               style={{ animationDelay: "240ms" }}
             >
               <p className="max-w-xl text-base leading-relaxed text-ink-foreground/75">
-                Metro City Builders invests in and develops state-of-the-art medical facilities,
-                micro-hospitals, mixed-use and multifamily communities across Southern California.
+                Metro City Builders invests in and develops next-generation medical facilities,
+                micro-hospitals, and mixed-use and multifamily communities throughout Southern
+                California.
               </p>
               <Link
                 to="/our-projects"
@@ -140,17 +141,17 @@ function Home() {
             className="space-y-7 text-[1.0625rem] leading-[1.8] text-muted-foreground"
           >
             <p>
-              Metro City Builders is a Los Angeles-based real estate development firm with over 20
-              years of experience delivering high-quality residential and commercial projects.
-              Founded by Principal and CEO Tony Zeng, the firm has specialized since 2003 in the
-              investment and development of state-of-the-art medical facilities, micro-hospitals,
-              and multifamily communities.
+              Metro City Builders is a Los Angeles–based real estate development firm with more than
+              two decades of experience delivering high-quality residential and commercial projects.
+              Founded in 2003 by Principal and CEO Tony Zeng, the firm specializes in the investment
+              and development of state-of-the-art medical facilities, micro-hospitals, and
+              multifamily communities.
             </p>
             <p>
-              With a strong presence across Southern California, the firm is recognized for its
-              commitment to design excellence, innovation, and community-focused development. Each
-              project is thoughtfully planned and executed to enhance the built environment while
-              meeting the needs of a dynamic and growing population.
+              With a strong presence throughout Southern California, Metro City Builders is
+              recognized for its commitment to design excellence, innovation, and community-focused
+              development. Every project is thoughtfully planned and executed to elevate the built
+              environment while serving the needs of a dynamic, growing region.
             </p>
             <Link
               to="/about-us"
@@ -164,7 +165,7 @@ function Home() {
         <div className="mt-24 grid gap-px border-y border-hairline bg-hairline sm:grid-cols-3">
           {[
             { k: "20+", v: "Years of development" },
-            { k: "4", v: "Counties active" },
+            { k: "4+", v: "Active Counties" },
             { k: "2018", v: "CA Small Business of the Year" },
           ].map((s, i) => (
             <Reveal key={s.k} delay={i * 100}>
@@ -192,7 +193,7 @@ function Home() {
             {[
               {
                 t: "Medical & Micro-Hospitals",
-                b: "State-of-the-art clinical, surgical and multifunctional medical facilities built around physicians and patients.",
+                b: "State-of-the-art clinical and surgical facilities designed around physicians and patients.",
               },
               {
                 t: "Mixed-Use",
@@ -200,11 +201,11 @@ function Home() {
               },
               {
                 t: "Multifamily & Residential",
-                b: "Townhomes, condominiums and detached homes designed for families at any stage.",
+                b: "Townhomes, condominiums, and detached homes designed for families at every stage of life",
               },
               {
                 t: "Senior, Office & Retail",
-                b: "Senior communities, office, retail and light industrial properties held as long-term investments.",
+                b: "Senior, office, retail and light industrial properties positioned for lasting value.",
               },
             ].map((c, i) => (
               <Reveal key={c.t} delay={i * 90}>
