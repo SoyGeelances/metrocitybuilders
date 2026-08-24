@@ -28,34 +28,39 @@ function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setResult("");
+  event.preventDefault();
+  const form = event.currentTarget; // ⬅️ guardamos la referencia ANTES del await
+  setIsSubmitting(true);
+  setResult("");
 
-    const formData = new FormData(event.currentTarget);
-    formData.append("access_key", "409bec85-bab7-4a7b-84ae-83d5bb21b3d6");
-    formData.append("to_email", contact.email);
-    formData.append("from_name", "Metro City Builders");
-    formData.append("from_email", "noresponse@metrocitybuilders.com");
+  const formData = new FormData(form);
+  formData.append("access_key", "409bec85-bab7-4a7b-84ae-83d5bb21b3d6");
+  formData.append("to_email", contact.email);
+  formData.append("from_name", "Metro City Builders");
+  formData.append("from_email", "noresponse@metrocitybuilders.com");
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
-      setResult(
-        data.success
-          ? "Thank you. We will be in touch shortly."
-          : "Something went wrong. Please try again.",
-      );
-      if (data.success) event.currentTarget.reset();
-    } catch {
-      setResult("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: formData,
+    });
+    const data = await response.json();
+    const submissionAccepted = response.ok && data.success === true;
+    setResult(
+      submissionAccepted
+        ? "Thank you. We will be in touch shortly."
+        : "Something went wrong. Please try again.",
+    );
+    if (submissionAccepted) form.reset();
+  } catch {
+    setResult("Something went wrong. Please try again.");
+  } finally {
+    setIsSubmitting(false);
   }
+}
 
   return (
     <>
