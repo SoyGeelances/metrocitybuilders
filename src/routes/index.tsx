@@ -79,50 +79,52 @@ function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-ink text-ink-foreground">
-        <div className="shell grid items-end gap-14 pt-36 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:pt-44 lg:pb-28">
-          <div>
-            <p className="rise text-[0.65rem] font-semibold tracking-[0.34em] text-ink-foreground/70 uppercase">
+      <section className="relative isolate min-h-[640px] overflow-hidden bg-ink text-ink-foreground lg:h-[min(100svh,62rem)]">
+        <img
+          src="/images/hero-image-mcb.webp"
+          alt="A Metro City Builders development in Southern California"
+          width={1980}
+          height={792}
+          fetchPriority="high"
+          className="kenburns absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,20,19,0.93)_0%,rgba(20,20,19,0.78)_28%,rgba(20,20,19,0.18)_62%,rgba(20,20,19,0.38)_100%)]" />
+
+        <div className="shell relative grid min-h-[580px] items-end pt-32 pb-20 text-left lg:h-full lg:max-w-none lg:grid-cols-[32%_68%] lg:gap-0">
+          <div className="w-full lg:col-start-1 lg:row-start-1 lg:pr-8">
+            <p className="rise mb-8 text-[0.65rem] font-semibold tracking-[0.34em] text-ink-foreground/75 uppercase lg:hidden">
               Los Angeles · Est. 2003
             </p>
             <h1
-              className="rise mt-8 font-display text-5xl leading-[1.03] text-ink-foreground sm:text-6xl lg:text-7xl"
+              className="rise max-w-[520px] font-display text-6xl leading-[0.9] text-ink-foreground sm:text-7xl lg:text-[clamp(4rem,5.8vw,6.2rem)]"
               style={{ animationDelay: "120ms" }}
             >
-              Real estate shaped
+              From <span className="text-bronze">Vision</span>
               <br />
-              by design, built
+              to <span className="text-bronze">Value.</span>
               <br />
-              to last.
+              <hr className={`w-[150px] my-2.5`} />
+              <span className="text-ink-foreground">From Land</span>
+              <br />
+              to <span className="text-bronze">Legacy.</span>
             </h1>
-            <div
-              className="rise mt-12 border-t border-ink-foreground/20 pt-8"
-              style={{ animationDelay: "240ms" }}
-            >
-              <p className="max-w-xl text-base leading-relaxed text-ink-foreground/75">
-                Metro City Builders invests in and develops next-generation medical facilities,
-                micro-hospitals, and mixed-use and multifamily communities throughout Southern
-                California.
-              </p>
-              <Link
-                to="/our-projects"
-                className="mt-8 inline-flex w-fit items-center gap-3 border border-ink-foreground/45 px-8 py-4 text-[0.7rem] font-semibold tracking-[0.22em] text-ink-foreground uppercase transition-colors hover:bg-ink-foreground hover:text-ink"
-              >
-                View the portfolio
-                <span aria-hidden>→</span>
-              </Link>
-            </div>
           </div>
           <div
-            className="rise ml-auto w-full max-w-[560px] overflow-hidden"
-            style={{ animationDelay: "320ms" }}
+            className="rise mt-10 w-full max-w-[560px] border-t border-ink-foreground/35 pt-6 sm:mt-12 sm:pt-7 lg:col-start-2 lg:row-start-1 lg:ml-8 lg:mt-0 lg:max-w-[630px] lg:self-end lg:justify-self-start lg:mb-6"
+            style={{ animationDelay: "240ms" }}
           >
-            <img
-              src="/images/hero-a.jpg"
-              alt="A Metro City Builders development in Southern California"
-              width={650}
-              className="aspect-[4/5] w-full object-cover"
-            />
+            <p className="text-sm leading-relaxed text-ink-foreground/78 sm:text-base">
+              Metro City Builders invests in and develops next-generation medical facilities,
+              micro-hospitals, and mixed-use and multifamily communities throughout Southern
+              California.
+            </p>
+            <Link
+              to="/our-projects"
+              className="mt-7 inline-flex w-fit items-center gap-3 border border-bronze px-7 py-3.5 text-[0.68rem] font-semibold tracking-[0.22em] text-ink-foreground uppercase transition-colors hover:bg-bronze hover:text-ink"
+            >
+              View the portfolio
+              <span aria-hidden>→</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -164,8 +166,8 @@ function Home() {
 
         <div className="mt-24 grid gap-px border-y border-hairline bg-hairline sm:grid-cols-3">
           {[
-            { k: "20+", v: "Years of development" },
-            { k: "4+", v: "Active Counties" },
+            { k: "25+", v: "Years of development" },
+            { k: "0.5+", v: "BN Invested to date" },
             { k: "2018", v: "CA Small Business of the Year" },
           ].map((s, i) => (
             <Reveal key={s.k} delay={i * 100}>

@@ -35,7 +35,7 @@ function AboutPage() {
 
       <div className="relative h-[52vh] overflow-hidden bg-ink">
         <img
-          src="/images/construction.jpg"
+          src="/images/construction.webp"
           alt="A Metro City Builders project under construction"
           className="h-full w-full object-cover"
         />
