@@ -167,7 +167,7 @@ function Home() {
         <div className="mt-24 grid gap-px border-y border-hairline bg-hairline sm:grid-cols-3">
           {[
             { k: "25+", v: "Years of development" },
-            { k: "0.5+", v: "BN Invested to date" },
+            { k: "$300+", v: "Million Invested to date" },
             { k: "2018", v: "CA Small Business of the Year" },
           ].map((s, i) => (
             <Reveal key={s.k} delay={i * 100}>
