@@ -1,0 +1,94 @@
+name: Deploy production to Namecheap
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Detect build tool and output directory
+        id: project
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs';
+
+          const packageJson = JSON.parse(readFileSync('package.json', 'utf8'));
+          const dependencies = {
+            ...packageJson.dependencies,
+            ...packageJson.devDependencies,
+          };
+
+          let buildTool;
+          let buildDirectory;
+
+          if (dependencies.vite) {
+            buildTool = 'Vite';
+            buildDirectory = 'dist';
+          } else if (dependencies['react-scripts']) {
+            buildTool = 'Create React App';
+            buildDirectory = 'build';
+          } else {
+            throw new Error('Could not detect Vite or Create React App in package.json.');
+          }
+
+          if (!packageJson.scripts?.build) {
+            throw new Error('package.json must define a build script.');
+          }
+
+          appendFileSync(process.env.GITHUB_OUTPUT, `build_tool=${buildTool}\n`);
+          appendFileSync(process.env.GITHUB_OUTPUT, `build_directory=${buildDirectory}\n`);
+          console.log(`Detected ${buildTool}; expected output: ${buildDirectory}`);
+          NODE
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build site
+        run: bun run build
+
+      - name: Verify build output
+        env:
+          BUILD_DIRECTORY: ${{ steps.project.outputs.build_directory }}
+        run: test -d "$BUILD_DIRECTORY"
+
+      - name: Start SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.PRODUCTION_SSH_KEY }}
+
+      - name: Deploy to Namecheap
+        env:
+          PRODUCTION_HOST: ${{ secrets.PRODUCTION_HOST }}
+          PRODUCTION_USER: ${{ secrets.PRODUCTION_USER }}
+          PRODUCTION_PATH: ${{ secrets.PRODUCTION_PATH }}
+          PRODUCTION_PORT: ${{ secrets.PRODUCTION_PORT || '21098' }}
+          BUILD_DIRECTORY: ${{ steps.project.outputs.build_directory }}
+        run: |
+          set -euo pipefail
+          : "${PRODUCTION_HOST:?Missing PRODUCTION_HOST secret}"
+          : "${PRODUCTION_USER:?Missing PRODUCTION_USER secret}"
+          : "${PRODUCTION_PATH:?Missing PRODUCTION_PATH secret}"
+          [[ "$PRODUCTION_PORT" =~ ^[0-9]+$ ]]
+          rsync --archive --compress --delete \
+            --rsh="ssh -p $PRODUCTION_PORT -o StrictHostKeyChecking=accept-new" \
+            "$BUILD_DIRECTORY/" \
+            "$PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_PATH/"

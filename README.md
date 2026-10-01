@@ -16,12 +16,12 @@ bun run dev
 
 El sitio queda en http://localhost:8080
 
-## Producción
+## Despliegue
 
-```sh
-bun run build
-node .output/server/index.mjs
-```
+- Un `push` a `master` compila con Vite y sincroniza `dist/` por SSH a Namecheap/cPanel.
+- Un `push` a `develop` publica un deployment de preview en Vercel.
+- Configura los repository secrets `PRODUCTION_HOST`, `PRODUCTION_USER`, `PRODUCTION_SSH_KEY`, `PRODUCTION_PATH`, `VERCEL_TOKEN` y `VERCEL_PROJECT_ID` en GitHub Actions. El puerto Namecheap/cPanel usa `21098` por defecto; define el secret opcional `PRODUCTION_PORT` si tu servidor usa otro. Define `VERCEL_ORG_ID` como repository variable (o secret).
+- El archivo `public/.htaccess` se copia al build y redirige las rutas de la SPA a `index.html` en Apache.
 
 ## Estructura
 
